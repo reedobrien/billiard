@@ -431,6 +431,8 @@ def get_command_line():
         return [sys.executable, '--billiard-fork']
     else:
         prog = 'from billiard.forking import main; main()'
+        if "--preserve-syspath" in sys.argv:
+            os.environ['PYTHONPATH'] = ':'.join(sys.path)
         return [_python_exe, '-c', prog, '--billiard-fork']
 
 
